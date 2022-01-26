@@ -20,25 +20,39 @@ app.use(cookieParser());
 // controllers 
 const userController = require('./controllers/userController');
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/index.html'));
-  // res.sendFile(path.resolve(__dirname, '../client/index.html'));
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/index.html'));
+//   // res.sendFile(path.resolve(__dirname, '../client/index.html'));
+// })
+
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/index.html'));
 })
 
 
-// app.get('/api/')
-// login path
-// app.get('/', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../client/index.html'));
-// })
-
+app.get('/api/standings',(req, res, next) => {
+  db.query('SELECT * FROM gamelog ORDER BY score DESC LIMIT(10)', (err, data) => {
+    if (err) return next({
+      message: {
+        err: 'An error occurred while getting standings from database', 
+      }
+    });
+    else {
+      console.log(data.rows);
+      // res.locals.standings = data.rows;
+      res.status(200).json(data.rows)
+    }
+  })
+})
+ 
 // app.get('/register', (req, res) => {
 //   res.sendFile(path.resolve(__dirname, '../client/index.html'));
 // })
 
 app.post('/api/register',(req, res, next) => {
-    console.log(req);
     console.log(' in app.post register')
+    return next();
   },  
   userController.createUser,
 )
@@ -49,15 +63,21 @@ app.post('/api/register',(req, res, next) => {
 
 // global error handler 
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-})
+  const defaultErr = {
+    log: 'Express error handler caught unknown middleware error',
+    status: 500,
+    message: { err: 'An error occurred' },
+  };
+  const errorObj = Object.assign({}, defaultErr, err);
+  console.log(errorObj.log);
+  return res.status(errorObj.status).json(errorObj.message);
+});
+
 
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 })
-app.use((req, res) => {
-  res.status(404);
-})
+
 
 module.exports = app;

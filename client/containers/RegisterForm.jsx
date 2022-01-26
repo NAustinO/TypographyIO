@@ -21,7 +21,10 @@ const RegisterForm = (props) => {
   const handleSubmit = (event) => {
     console.log('handling submit')
     fetch('api/register', {
-      method: 'POST'
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json'
+      }
     })
       .then(response => response.json())
       .then(data => {
@@ -34,25 +37,12 @@ const RegisterForm = (props) => {
       }) 
   }
 
-
-
   // {*onClick = {() => {navigate('/')}}*}
   // method="post" action="post"
   return (
     <div className="register-container"> 
       <h1>Welcome please enter your password</h1>
-      <div>
-        <label>
-            Username
-            <input type="text" name="username" value={username} onChange={handleUsernameChange} />
-          </label>
-          <label>
-          Password
-            <input type="password" name="password" value={password} onChange={handlePasswordChange} />
-        </label>
-      </div>
-      <button onClick={handleSubmit}>Submit</button>
-      {/* <form onSubmit={handleSubmit}> 
+      <form> 
         <label>
           Username
           <input type="text" name="username" value={username} onChange={handleUsernameChange} />
@@ -61,11 +51,12 @@ const RegisterForm = (props) => {
           Password
           <input type="password" name="password" value={password} onChange={handlePasswordChange} />
         </label>
-        <input type="submit" value="Submit"/>
-      </form> */}
+        <input type="button" value="Submit" onClick={handleSubmit}/>
+      </form>
     </div>
   )
 } 
+
 
 export default RegisterForm;
 

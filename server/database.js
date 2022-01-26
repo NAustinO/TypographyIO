@@ -21,3 +21,7 @@ const pool = new Pool({
 });
 
 module.exports = pool; 
+
+
+// to insert 
+// example INSERT INTO gamelog VALUES (nextval('game_id_sequence'),'nick',3, '2022-01-26T19:25:57.120Z')

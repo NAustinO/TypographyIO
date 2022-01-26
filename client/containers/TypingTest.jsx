@@ -10,10 +10,11 @@ import Keyboard from '../components/Keyboard';
 const TypingTest = () => {
   const [time, updateTime] = useState(60);
   const [score, updateScore] = useState(0);
-  const [standings, updateStandings] = useState('');
+  const [standings, updateStandings] = useState([]);
 
+  // on first set
   useEffect(() => {
-    updateStandings(getStandings());
+    getStandings();
   }, [])
 
 
@@ -32,7 +33,14 @@ const TypingTest = () => {
   }
 
   const getStandings = () => {
-    fetch('')
+    console.log('getting standings ')
+    fetch('api/standings', {
+      method: 'GET', 
+    })
+      .then(response => response.json())
+      .then(data => {
+        updateStandings(data);
+      })
   }
 
   return (

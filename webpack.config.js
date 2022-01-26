@@ -9,7 +9,9 @@ module.exports = {
       directory: path.join(__dirname, 'client')
     },
     proxy: {
-      '/api' : 'http://localhost:3000',
+      '/api/': {
+        target: "http://localhost:3000",
+      }
     }
   },
   mode: process.env.NODE_ENV,
