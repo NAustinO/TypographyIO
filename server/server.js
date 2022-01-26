@@ -8,9 +8,7 @@ const db = require('./database');
 const app = express();
 const PORT = 3000; 
 
-// controllers 
-const userController = require('./controllers/userController');
-
+// Serve the static files from the React app
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 // to support URL-encoded bodies 
@@ -19,11 +17,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // to parse cookies from the HTTP request
 app.use(cookieParser());
 
+// controllers 
+const userController = require('./controllers/userController');
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/index.html'));
+  res.sendFile(path.join(__dirname, '../client/index.html'));
+  // res.sendFile(path.resolve(__dirname, '../client/index.html'));
 })
 
+
+// app.get('/api/')
 // login path
 // app.get('/', (req, res) => {
 //   res.sendFile(path.resolve(__dirname, '../client/index.html'));
@@ -33,7 +36,10 @@ app.get('*', (req, res) => {
 //   res.sendFile(path.resolve(__dirname, '../client/index.html'));
 // })
 
-app.post('/register',
+app.post('/api/register',(req, res, next) => {
+    console.log(req);
+    console.log(' in app.post register')
+  },  
   userController.createUser,
 )
 

@@ -20,5 +20,10 @@
 }
 
 .register-container {
-  
+  display: flex;
+  flex-direction: column;
+}
+ 
+.app {
+  display: flex;
 }
