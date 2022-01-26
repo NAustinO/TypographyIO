@@ -1,16 +1,17 @@
 const path = require('path');
 const express = require('express');
 
+
 const app = express();
 const PORT = 3000; 
 
 app.use(express.static(path.resolve(__dirname, '../client')));
 app.use(express.json());
 
+
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));
 })
-
 
 app.get('/error', (req, res) => {
   res.send('There was an error');
@@ -18,7 +19,6 @@ app.get('/error', (req, res) => {
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  
 })
 
 

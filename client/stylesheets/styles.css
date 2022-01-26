@@ -1,0 +1,11 @@
+.timer {
+  border: 2px solid black;
+}
+
+.black-border {
+  border: 2px solid black; 
+}
+
+.container {
+  display: flex;
+}
