@@ -10,7 +10,6 @@ const CustomKeyboard = ({ type }) => {
   const [layoutName, setLayoutName] = useState('default');
   const layout = {
     default: [
-      'esc f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12',
       '` 1 2 3 4 5 6 7 8 9 0 - = {bksp}',
       '{tab} q w e r t y u i o p [ ] \\',
       '{lock} a s d f g h j k l ; \' {enter}',
@@ -18,7 +17,6 @@ const CustomKeyboard = ({ type }) => {
       'fn ctrl op cmd {space} cmd op'
     ],
     shift: [
-      'esc f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12',
       '~ ! @ # $ % ^ & * ( ) _ + {bksp}',
       '{tab} Q W E R T Y U I O P { } |',
       '{lock} A S D F G H J K L : " {enter}',
@@ -27,22 +25,26 @@ const CustomKeyboard = ({ type }) => {
     ]
   }
 
+  // document.addEventListener('keydown' , (e) => {
+  //   console.log(e.code)
+  //   console.log(e.key)
+  //   if (e.key === 'Shift' || e.key==="CapsLock") handleShift();
+  // });
+
   const onKeyPress = (button) => {
     console.log('Button pressed', button);
     if (button === '{shift}' || button === '{lock}') handleShift();
   } 
 
   const handleShift = () => {
-    console.log('handling shift')
     let toggledLayout = (layoutName === 'default') ? 'shift' : 'default';
     setLayoutName(toggledLayout);
   }
 
   const onChangeInput = (event) => {
     console.log(event)
-    // let input = event.target.value; 
-
-    console.log(event.target)
+    // // let input = event.target.value; 
+    // console.log(event.target)
   }
   return (
     <Keyboard 
@@ -51,7 +53,6 @@ const CustomKeyboard = ({ type }) => {
       layoutName={layoutName}
       onChange = {(input) => onChangeInput(input)}
       onKeyPress = {(button) => onKeyPress(button)}
-    
     />
   )
 } 

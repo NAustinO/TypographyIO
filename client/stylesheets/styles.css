@@ -9,3 +9,11 @@
 .container {
   display: flex;
 }
+
+.key {
+  border: 1px solid black;
+}
+
+.keyboard {
+  
+}

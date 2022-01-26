@@ -5,20 +5,21 @@ import Scorecard from './Scorecard';
 import Leaderboard from './Leaderboard';
 import TypingWindow from './TypingWindow';
 import CustomKeyboard from './CustomKeyboard';
+import Keyboard from './Keyboard';
 
 const App = (props) => {
 
   const [time, updateTime] = useState(60);
   const [score, updateScore] = useState(0);
   const [standings, updateStandings] = useState('');
-  
+
 
 
   return (
     <div className='container'>
       <div>
         <TypingWindow/>
-        <CustomKeyboard />
+        <Keyboard/>
       </div>
       <div>
         <Timer time={time} />
