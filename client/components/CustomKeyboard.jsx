@@ -5,7 +5,7 @@ import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 
 
-const CustomKeyboard = ({ type }) => {
+const CustomKeyboard = (props) => {
 
   const [layoutName, setLayoutName] = useState('default');
   const layout = {
@@ -41,11 +41,6 @@ const CustomKeyboard = ({ type }) => {
     setLayoutName(toggledLayout);
   }
 
-  const onChangeInput = (event) => {
-    console.log(event)
-    // // let input = event.target.value; 
-    // console.log(event.target)
-  }
   return (
     <Keyboard 
       // keyboardRef ={r => (keyboard = r) }
