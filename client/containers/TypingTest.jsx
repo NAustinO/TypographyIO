@@ -1,14 +1,13 @@
+
 import React, { useState, useEffect } from 'react';
-import reactDom from 'react-dom';
-import Timer from './Timer';
-import Scorecard from './Scorecard';
-import Leaderboard from './Leaderboard';
-import TypingWindow from './TypingWindow';
-import CustomKeyboard from './CustomKeyboard';
-import Keyboard from './Keyboard';
+import Timer from '../components/Timer';
+import Scorecard from '../components/Scorecard';
+import Leaderboard from '../components/Leaderboard';
+import TypingWindow from '../components/TypingWindow';
+import CustomKeyboard from '../components/CustomKeyboard';
+import Keyboard from '../components/Keyboard';
 
-const App = (props) => {
-
+const TypingTest = () => {
   const [time, updateTime] = useState(60);
   const [score, updateScore] = useState(0);
   const [standings, updateStandings] = useState('');
@@ -49,7 +48,6 @@ const App = (props) => {
       </div>
     </div>
   )
-} 
+}
 
-export default App;
-
+export default TypingTest;

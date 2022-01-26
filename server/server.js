@@ -11,7 +11,7 @@ const PORT = 3000;
 // controllers 
 const userController = require('./controllers/userController');
 
-app.use(express.static(path.resolve(__dirname, '../client')));
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 // to support URL-encoded bodies 
 app.use(bodyParser.urlencoded({ extended: true })); 
@@ -20,21 +20,26 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 
-// login path
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));
 })
 
+// login path
+// app.get('/', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../client/index.html'));
+// })
+
+// app.get('/register', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../client/index.html'));
+// })
+
 app.post('/register',
   userController.createUser,
-  (req, res) => {
-
-  }
 )
 
-app.get('/error', (req, res) => {
-  res.send('There was an error');
-})
+// app.get('/error', (req, res) => {
+//   res.send('There was an error');
+// })
 
 // global error handler 
 app.use((err, req, res, next) => {
