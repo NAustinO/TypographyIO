@@ -11,6 +11,8 @@ const PORT = 3000;
 // Serve the static files from the React app
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
+app.use(express.json());
+
 // to support URL-encoded bodies 
 app.use(bodyParser.urlencoded({ extended: true })); 
 
@@ -39,8 +41,6 @@ app.get('/api/standings',(req, res, next) => {
       }
     });
     else {
-      console.log(data.rows);
-      // res.locals.standings = data.rows;
       res.status(200).json(data.rows)
     }
   })
@@ -50,10 +50,7 @@ app.get('/api/standings',(req, res, next) => {
 //   res.sendFile(path.resolve(__dirname, '../client/index.html'));
 // })
 
-app.post('/api/register',(req, res, next) => {
-    console.log(' in app.post register')
-    return next();
-  },  
+app.post('/api/register',
   userController.createUser,
 )
 

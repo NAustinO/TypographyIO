@@ -19,26 +19,34 @@ const RegisterForm = (props) => {
   }
 
   const handleSubmit = (event) => {
-    console.log('handling submit')
-    fetch('api/register', {
+    // validating user input 
+    if (username.length < 5) { 
+      alert('Username must be more than 5 characters');
+      return;
+    };
+    if (password.length < 5) { 
+      alert('Password must be more than 5 characters');
+      return;
+    }
+
+    let userInfo = {username: username, password: password};
+  
+    fetch('/api/register', {
       method: 'POST', 
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userInfo),
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        console.log(event);
+      .then(response => {
+        window.alert('Successfully created user. Redirecting to homepage');
         navigate('/')
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
       }) 
   }
 
-  // {*onClick = {() => {navigate('/')}}*}
-  // method="post" action="post"
   return (
     <div className="register-container"> 
       <h1>Welcome please enter your password</h1>
@@ -56,7 +64,6 @@ const RegisterForm = (props) => {
     </div>
   )
 } 
-
 
 export default RegisterForm;
 

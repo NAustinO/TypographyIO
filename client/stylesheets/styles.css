@@ -26,4 +26,11 @@
  
 .app {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar {
+  display: flex;
+  column-gap: 10%;
 }

@@ -1,9 +1,7 @@
 const db = require('../database');
 const bcrypt = require('bcrypt');
 
-const saltRounds = 12; 
-
-
+const SALTROUNDS = 12; 
 
 
 const userController = {};
@@ -13,22 +11,34 @@ userController.checkAuthStatus = (req, res, next) => {
   
 }
 
-// TODO 
+// TODO check if user is logged in already
 userController.createUser = (req, res, next) => {
-  if (!req.body.username || req.body.password) {
+
+  if (!req.body.username || !req.body.password) {
+    console.log('no username or password found')
+    // return res.redirect('/register');
     return next('No username or password found')
   } else {
-    bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
-      const query = 'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING users.id';
-      const params = [req.body.username, hash];
-      db.query(query, params, (err, res) => {
+    const date = new Date();
+    bcrypt.hash(req.body.password, SALTROUNDS, (err, hash) => {
+      if (err) {
+        return next({ 
+          message: {err: 'Password failed to hash in createUser'}
+        })
+      }
+      const query = `
+        INSERT INTO users (id, username, date_created, last_updated, password) 
+        VALUES (nextval(\'userid_sequence\'), $1, $2, $3, $4) 
+        RETURNING id`;
+      const params = [req.body.username, date, date, hash];
+      db.query(query, params, (err, data) => {
         if (err) {
-          console.log('There was an error in userController.createUser');
-          res.status(400).send();
-        } else return next();
+          return next({message: {err: err}})
+        } 
+        console.log(data);
+        // id is in data.rows[0].id
       })
-      
-      
+      return res.redirect('/');
     })
   }
 }

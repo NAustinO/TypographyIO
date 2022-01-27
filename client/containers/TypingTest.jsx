@@ -6,15 +6,18 @@ import Leaderboard from '../components/Leaderboard';
 import TypingWindow from '../components/TypingWindow';
 import CustomKeyboard from '../components/CustomKeyboard';
 import Keyboard from '../components/Keyboard';
+import sampleText from '../../server/data/phrases';
 
 const TypingTest = () => {
-  const [time, updateTime] = useState(60);
-  const [score, updateScore] = useState(0);
-  const [standings, updateStandings] = useState([]);
+  const [time, setTime] = useState(60);
+  const [score, setScore] = useState(0);
+  const [standings, setStandings] = useState([]);
+  const [phrases, setPhrases] = useState([]);
 
-  // on first set
+  // called on initial render 
   useEffect(() => {
     getStandings();
+    parsePhrases(sampleText);
   }, [])
 
 
@@ -23,23 +26,46 @@ const TypingTest = () => {
       endGame();
     } else { 
       setTimeout(()=> {
-        updateTime(time - 1);
+        setTime(time - 1);
       }, 1000);
     }
   }, [time])
 
+  // called when the game is ended 
   const endGame = () => {
 
   }
 
+  const getNextPhrase = () => {
+    if (phrases.length === 1) {
+      parsePhrases(sampleText);
+    }
+    let phrase = phrases.pop();
+    updatePhrases()
+
+  }
+
+  /**
+   * 
+   * @param {String} phrase
+   */
+  const parsePhrases = (phrase) => {
+    updatePhrases(phrase.split(' ')); // splits the phrase string on spaces and sets the state 
+  }
+
+
+
+  // called on initial render to updated the standings state and pass to child component 
   const getStandings = () => {
-    console.log('getting standings ')
     fetch('api/standings', {
       method: 'GET', 
     })
       .then(response => response.json())
       .then(data => {
-        updateStandings(data);
+        setStandings(data);
+      })
+      .error(err => {
+        console.log(err);
       })
   }
 

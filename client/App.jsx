@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 const App = (props) => {
   return (
     <div className="app">
-      {/* <Navbar/> */}
+      <Navbar/>
       <ComponentRouter/>
     </div>
   )
