@@ -2,12 +2,16 @@ import React from 'react';
 import reactDom from 'react-dom';
 import '../stylesheets/styles.css';
 
-const Scorecard = ({ score }) => {
-
+const Scorecard = ({ score, initialTime }) => {
 
   return (
     <div className='black-border'>
-      Score: <span>{score}</span>
+      <div>
+        Score (Total Characters Matched): <span>{score}</span>
+      </div>
+      <div>
+        Characters/Min: <span>{Math.floor(score/initialTime)}</span>
+      </div>
     </div>
   )
 } 

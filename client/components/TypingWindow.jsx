@@ -1,36 +1,36 @@
+
 import React, { useState } from 'react';
 import '../stylesheets/styles.css';
 
-const TypingWindow = ({}) => {
-  const [queue, setQueue] = useState([]);//  may move this up to parent 
-  const [phrase, setPhrase] = useState('Somephrasefornow'); // may move these upt o parent 
+const TypingWindow = ({ handleMatchedInput, currentPhrase, queue }) => {
+
   const [currentInput, setCurrentInput] = useState('');
 
+  // used to handle the change within the typing area
   const handleTextChange = (event) => {
     setCurrentInput(event.target.value); 
-    // this is how to 
-    if (event.target.value.length > 5) {
-      event.target.value = '';
-    }
-    // if the phrase is equal to theh current input 
-      // call the get next from the parent component
-      // set a new phrase from the queue 
-      // update the queue 
-      // reset the typing area to nothing 
 
-      // MAYBE: 
-        // Add animation when a phrase is mathced on the score 
-        
+    // this is how to reset the value
+    if (event.target.value === currentPhrase) {
+      handleMatchedInput()
+      event.target.value = '';
+      setCurrentInput('');
+    }
   }
 
+  // const componentifyQueue = () => {
 
+  // }
+  
   return (
     <div className='typing-window black-border'>
+      <div>
+      </div>
       <div className='flex-row space-evenly'>
         <span>
           Phrase: 
         </span>
-        <div className='test-phrase-area'>{phrase}</div>
+        <div className='test-phrase-area'>{currentPhrase}</div>
       </div>
       <div className='flex-row space-evenly'>
         <span>

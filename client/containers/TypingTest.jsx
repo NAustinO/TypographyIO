@@ -9,15 +9,33 @@ import Keyboard from '../components/Keyboard';
 import sampleText from '../../server/data/phrases';
 
 const TypingTest = () => {
-  const [time, setTime] = useState(60);
+  const initialTime = 60; 
+  const queueLength = 5; 
+
+  const [time, setTime] = useState(initialTime);
   const [score, setScore] = useState(0);
   const [standings, setStandings] = useState([]);
   const [phrases, setPhrases] = useState([]);
+  const [queue, setQueue] = useState([]); // queue length of 5 
+  const [currentPhrase, setCurrentPhrase] = useState('')
+
 
   // called on initial render 
   useEffect(() => {
-    getStandings();
-    parsePhrases(sampleText);
+    getStandings(); // load the standings and set the state 
+
+    const parsedPhrases = sampleText.split(' ').reverse();
+
+    const initialPhrase = parsedPhrases[0]; 
+
+    const newQueue = parsedPhrases.splice(1, queueLength+1);
+
+    setCurrentPhrase(initialPhrase);
+    // parsePhrases(sampleText); // set the phrases state 
+  
+    setQueue(newQueue); // sets the queue to the new queue array 
+    
+    setPhrases(parsedPhrases); // resets the phrases array state
   }, [])
 
 
@@ -36,13 +54,24 @@ const TypingTest = () => {
 
   }
 
-  const getNextPhrase = () => {
-    if (phrases.length === 1) {
-      parsePhrases(sampleText);
-    }
-    let phrase = phrases.pop();
+  const handleMatchedInput = () => {
+    // update the score 
+    setScore(score + currentPhrase.length) 
+
+    // update the current phrase 
+    const nextPhrase = queue.shift();
+    
+    setCurrentPhrase(nextPhrase);
+  
+    // update the queue
+    queue.push(phrases.shift());
+    setQueue(queue);
+
+    // update the phrases array 
     setPhrases(phrases);
   }
+
+
 
   /**
    * 
@@ -70,14 +99,22 @@ const TypingTest = () => {
   }
 
   return (
+    
     <div className='container'>
       <div>
-        <TypingWindow/>
+        <TypingWindow
+          queue={queue}
+          handleMatchedInput={handleMatchedInput}
+          currentPhrase={currentPhrase}
+        />
         <CustomKeyboard />
       </div>
       <div>
         <Timer time={time} />
-        <Scorecard score={score} />
+        <Scorecard 
+          initialTime={initialTime}
+          score={score} 
+        />
         <Leaderboard standings={standings} />
       </div>
     </div>
