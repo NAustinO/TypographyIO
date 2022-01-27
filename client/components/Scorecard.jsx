@@ -4,7 +4,6 @@ import '../stylesheets/styles.css';
 
 const Scorecard = ({ score }) => {
 
-  
 
   return (
     <div className='black-border'>

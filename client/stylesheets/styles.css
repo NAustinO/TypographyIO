@@ -34,3 +34,40 @@
   display: flex;
   column-gap: 10%;
 }
+
+.typing-input-area { 
+  /* width: 400px;  */
+  width: 75%;
+  background-color: rgb(233, 226, 226);
+}
+
+.test-phrase-area {
+  width: 75%;
+  border: 2px solid grey;
+}
+
+.typing-window {
+  display: flex;
+  flex-direction: column;
+  height: 300px; 
+  min-width: 400px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  align-content: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.space-evenly {
+  justify-content: space-evenly;
+}
+

@@ -41,8 +41,7 @@ const TypingTest = () => {
       parsePhrases(sampleText);
     }
     let phrase = phrases.pop();
-    updatePhrases()
-
+    setPhrases(phrases);
   }
 
   /**
@@ -50,7 +49,8 @@ const TypingTest = () => {
    * @param {String} phrase
    */
   const parsePhrases = (phrase) => {
-    updatePhrases(phrase.split(' ')); // splits the phrase string on spaces and sets the state 
+    // TOOD filter out phrases that are not a certain length 
+    setPhrases(phrase.split(' ')); // splits the phrase string on spaces and sets the state 
   }
 
 
@@ -64,9 +64,9 @@ const TypingTest = () => {
       .then(data => {
         setStandings(data);
       })
-      .error(err => {
-        console.log(err);
-      })
+      // .error(err => {
+      //   console.log(err);
+      // })
   }
 
   return (

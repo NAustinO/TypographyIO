@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 import '../stylesheets/styles.css';
 import Keyboard from 'react-simple-keyboard';
@@ -25,11 +25,23 @@ const CustomKeyboard = (props) => {
     ]
   }
 
-  // document.addEventListener('keydown' , (e) => {
-  //   console.log(e.code)
-  //   console.log(e.key)
-  //   if (e.key === 'Shift' || e.key==="CapsLock") handleShift();
-  // });
+  const handleKeyDown = (e) => {
+    if (e.key === 'Shift') handleShift();
+  };
+
+  const handleKeyUp = (e) => {
+    if (e.key === 'Shift') handleShift();
+  }
+
+  // event listener useEffect with cleanup 
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keyup', handleKeyUp);
+    }
+  })
 
   const onKeyPress = (button) => {
     console.log('Button pressed', button);
