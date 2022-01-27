@@ -17,7 +17,8 @@ const TypingTest = () => {
   const [standings, setStandings] = useState([]);
   const [phrases, setPhrases] = useState([]);
   const [queue, setQueue] = useState([]); // queue length of 5 
-  const [currentPhrase, setCurrentPhrase] = useState('')
+  const [currentPhrase, setCurrentPhrase] = useState('');
+  // const [timeElapsed, setTimeElapsed] = useState(0);
 
 
   // called on initial render 
@@ -26,7 +27,7 @@ const TypingTest = () => {
 
     const parsedPhrases = sampleText.split(' ').reverse();
 
-    const initialPhrase = parsedPhrases[0]; 
+    const initialPhrase = parsedPhrases.shift(); 
 
     const newQueue = parsedPhrases.splice(1, queueLength+1);
 
@@ -112,6 +113,7 @@ const TypingTest = () => {
       <div>
         <Timer time={time} />
         <Scorecard 
+          timeRemaining={time}
           initialTime={initialTime}
           score={score} 
         />

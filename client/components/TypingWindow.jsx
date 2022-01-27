@@ -18,25 +18,29 @@ const TypingWindow = ({ handleMatchedInput, currentPhrase, queue }) => {
     }
   }
 
-  // const componentifyQueue = () => {
-
-  // }
-  
   return (
     <div className='typing-window black-border'>
-      <div>
+      <div className='typing-window-section flex-row space-evenly'>
+        <div className='typing-window-section-label'>Up Next:</div>
+        <div className='typing-window-section-content'>
+        {
+          queue.slice().reverse().map((el, index) => {
+            return <div key={index}>{el}</div>
+          })
+        }
+        </div>
       </div>
-      <div className='flex-row space-evenly'>
-        <span>
+      <div className='typing-window-section flex-row space-evenly'>
+        <span className='typing-window-section-label'>
           Phrase: 
         </span>
-        <div className='test-phrase-area'>{currentPhrase}</div>
+        <div className='test-phrase-area typing-window-section-content'>{currentPhrase}</div>
       </div>
-      <div className='flex-row space-evenly'>
-        <span>
+      <div className='typing-window-section flex-row space-evenly'>
+        <span className='typing-window-section-label'>
           Type Here: 
         </span>
-        <input className='typing-input-area' type="text" onChange={handleTextChange} />
+        <input className='typing-window-section-content typing-input-area' autoFocus type="text" onChange={handleTextChange} />
       </div>
     </div>
   )
