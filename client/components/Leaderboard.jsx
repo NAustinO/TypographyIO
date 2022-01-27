@@ -11,8 +11,9 @@ const Leaderboard = ({  standings }) => {
 
   return (
     <StyledTimer>
-      <h3>Current Standings</h3>
+      <h3>Current Leaderboard</h3>
       {leaders}
+      <div style={{fontSize: '10pt', marginTop: '15px'}}>**Note: results are in characters/min**</div>
     </StyledTimer>
   )
 } 

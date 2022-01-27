@@ -34,7 +34,8 @@ app.get('/', (req, res) => {
 
 
 app.get('/api/standings',(req, res, next) => {
-  db.query('SELECT * FROM gamelog ORDER BY score DESC LIMIT(10)', (err, data) => {
+
+  db.query(`SELECT * FROM gamelog ORDER BY score DESC LIMIT(10)`, (err, data) => {
     if (err) return next({
       message: {
         err: 'An error occurred while getting standings from database', 
@@ -53,6 +54,27 @@ app.get('/api/standings',(req, res, next) => {
 app.post('/api/register',
   userController.createUser,
 )
+
+app.post('/api/record/result', (req, res, next) => {
+  console.log(' in api/record/result post serverside')
+  const playerName = req.body.playerName; 
+  const score = req.body.score; 
+  const query = `
+    INSERT INTO gamelog (id, username, score, datetime)
+    VALUES (nextval('game_id_sequence'), $1, $2, $3)
+  `;
+  const params = [playerName, score, new Date()];
+  db.query(query, params, (err, data) => {
+    if (err) { 
+      console.log(err);
+      return next({ message: {err: err}});
+    }
+    console.log(data);
+    return res.send('successfully put test into gamelog');
+  })
+})
+
+
 
 // app.get('/error', (req, res) => {
 //   res.send('There was an error');

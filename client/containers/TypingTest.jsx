@@ -8,26 +8,34 @@ import CustomKeyboard from '../components/CustomKeyboard';
 import Keyboard from '../components/Keyboard';
 import sampleText from '../../server/data/phrases';
 import styled from 'styled-components';
+import { useLocation } from 'react-router';
+import { useNavigate } from 'react-router-dom';
+import shuffle from '../utils/randomize';
 
-const TypingTest = (props) => {
-  const initialTime = 60; 
+const TypingTest = ({ name, duration }) => {
+
+  const navigate = useNavigate();
+  
+  const defaultTime = 60; 
+
+  const { state } = useLocation();
+  const [initialTime, setInitialTime] = useState(state.duration ? state.duration : defaultTime); 
+
   const queueLength = 5; 
 
-  const [time, setTime] = useState(initialTime);
+  const [time, setTime] = useState(state.duration ? state.duration : defaultTime);
+  const [playerName, setName] = useState(state.name ? state.name : 'Anonymous');
   const [score, setScore] = useState(0);
   const [standings, setStandings] = useState([]);
   const [phrases, setPhrases] = useState([]);
-  const [queue, setQueue] = useState([]); // queue length of 5 
+  const [queue, setQueue] = useState([]);
   const [currentPhrase, setCurrentPhrase] = useState('');
   const [gameOver, setGameOver] = useState(false);
-  // const [timeElapsed, setTimeElapsed] = useState(0);
 
-
-  // called on initial render 
+  // called on initial render to initialize the test
   useEffect(() => {
     getStandings(); // load the standings and set the state 
-
-    const parsedPhrases = sampleText.split(' ').reverse();
+    const parsedPhrases = shuffle(sampleText.split(' ').reverse());
     const initialPhrase = parsedPhrases.shift(); 
     const newQueue = parsedPhrases.splice(1, queueLength+1);
 
@@ -37,9 +45,10 @@ const TypingTest = (props) => {
   }, [])
 
 
+  // timer 
   useEffect(() => {
     if (time === 0) {
-      endGame();
+      endTest();
     } else { 
       setTimeout(()=> {
         setTime(time - 1);
@@ -48,8 +57,25 @@ const TypingTest = (props) => {
   }, [time])
 
   // called when the game is ended 
-  const endGame = () => {
-    setGameOver(true)
+  const endTest = () => {
+    setGameOver(true);
+
+    const normalizedScore = Math.floor(score/initialTime) * 60;
+
+    // normalize to charcters/min 
+    fetch('/api/record/result', {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json',
+      }, 
+      body: JSON.stringify({ playerName: playerName, score: normalizedScore})
+    })
+      .then(response => {
+        console.log(response);
+        window.alert(`Your characters/min score is ${normalizedScore}! You are now being redirected to the test setup window`);
+        navigate('/', {replace: true});
+      })
+
   }
 
   const handleMatchedInput = () => {
@@ -68,17 +94,6 @@ const TypingTest = (props) => {
       // update the phrases array 
       setPhrases(phrases);
     }
-  }
-
-
-
-  /**
-   * 
-   * @param {String} phrase
-   */
-  const parsePhrases = (phrase) => {
-    // TOOD filter out phrases that are not a certain length 
-    setPhrases(phrase.split(' ')); // splits the phrase string on spaces and sets the state 
   }
 
 
