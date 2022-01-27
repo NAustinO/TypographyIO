@@ -1,0 +1,106 @@
+body {
+  background-color: rgb(41 ,42 , 45);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.timer {
+  border: 2px solid black;
+}
+
+.black-border {
+  border: 1px solid black; 
+}
+
+
+.key {
+  border: 1px solid black;
+}
+
+.keyboard {
+  
+}
+
+.register-container {
+  display: flex;
+  flex-direction: column;
+}
+ 
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar {
+  display: flex;
+  column-gap: 10%;
+}
+
+
+
+.test-phrase-area {
+  width: 75%;
+  border: 2px solid grey;
+}
+
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  align-content: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.space-evenly {
+  justify-content: space-evenly;
+}
+
+
+
+.typing-test-container {
+
+}
+
+
+.typing-window {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 10px;
+  height: 300px; 
+  min-width: 500px;
+  padding: 25px;
+}
+
+.typing-window-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.typing-window-section-label {
+  width: 25%;
+}
+
+.typing-window-section-content {
+  width: 75%;
+  border: 1px solid lightgrey;
+  font-size: 14pt;
+  /* border-radius: 3px; */
+}
+
+.typing-input-area { 
+  /* width: 400px;  */
+  font-size: 16pt;
+  font-stretch: expanded;
+  width: 75%;
+  background-color: rgb(236, 236, 236);
+  border: 2px solid rgb(158, 211, 224);
+}

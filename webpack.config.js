@@ -6,10 +6,12 @@ module.exports = {
   entry: path.resolve(__dirname, './client/index.js'),
   devServer : {
     static: {
-      directory: path.join(__dirname, 'client'),
+      directory: path.join(__dirname, 'client')
     },
     proxy: {
-      '/' : 'http://localhost:3000',
+      '/api/': {
+        target: "http://localhost:3000",
+      }
     }
   },
   mode: process.env.NODE_ENV,
@@ -21,7 +23,7 @@ module.exports = {
     new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({
       title: '',
-      template: 'client/index.html'
+      template: path.join(__dirname, 'client', 'index.html')
     })
   ],
   module: {
@@ -43,7 +45,14 @@ module.exports = {
           'css-loader', 
           'sass-loader'
         ]
+      }, 
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.css'], 
   }
 }
