@@ -1,15 +1,15 @@
+body {
+  background-color: rgb(209, 209, 209);
+}
+
 .timer {
   border: 2px solid black;
 }
 
 .black-border {
-  border: 2px solid black; 
+  border: 1px solid black; 
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-}
 
 .key {
   border: 1px solid black;
@@ -61,6 +61,16 @@
   justify-content: space-evenly;
 }
 
+
+
+.typing-test-container {
+  background-color: rgb(248, 246, 246);
+  display: flex;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+
 .typing-window {
   display: flex;
   flex-direction: column;
@@ -84,7 +94,7 @@
 .typing-window-section-content {
   width: 75%;
   border: 1px solid lightgrey;
-  border-radius: 3px;
+  /* border-radius: 3px; */
 }
 
 .typing-input-area { 

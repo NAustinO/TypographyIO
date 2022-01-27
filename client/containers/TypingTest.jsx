@@ -100,8 +100,7 @@ const TypingTest = () => {
   }
 
   return (
-    
-    <div className='container'>
+    <div className='typing-test-container'>
       <div>
         <TypingWindow
           queue={queue}
