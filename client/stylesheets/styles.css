@@ -1,5 +1,6 @@
 body {
-  background-color: rgb(209, 209, 209);
+  background-color: rgb(41 ,42 , 45);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .timer {
@@ -64,10 +65,7 @@ body {
 
 
 .typing-test-container {
-  background-color: rgb(248, 246, 246);
-  display: flex;
-  justify-content: center;
-  border-radius: 4px;
+
 }
 
 
@@ -77,7 +75,7 @@ body {
   justify-content: center;
   row-gap: 10px;
   height: 300px; 
-  min-width: 400px;
+  min-width: 500px;
   padding: 25px;
 }
 
@@ -94,12 +92,15 @@ body {
 .typing-window-section-content {
   width: 75%;
   border: 1px solid lightgrey;
+  font-size: 14pt;
   /* border-radius: 3px; */
 }
 
 .typing-input-area { 
   /* width: 400px;  */
+  font-size: 16pt;
+  font-stretch: expanded;
   width: 75%;
-  background-color: rgb(233, 226, 226);
-  border: 2px solid darkgrey;
+  background-color: rgb(236, 236, 236);
+  border: 2px solid rgb(158, 211, 224);
 }

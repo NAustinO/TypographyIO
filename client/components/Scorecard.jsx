@@ -1,19 +1,37 @@
 import React from 'react';
+import styled from 'styled-components';
 import reactDom from 'react-dom';
+import { StyledTimer } from './Timer';
 import '../stylesheets/styles.css';
 
-const Scorecard = ({ score, initialTime, timeRemaining }) => {
+const Scorecard = ({ score, initialTime, timeRemaining, ...rest }) => {
 
   return (
-    <div className='black-border'>
+    <StyledTimer>
+      <h2>Scorecard</h2>
       <div>
-        Score (Total Characters Matched): <span>{score}</span>
+        <strong>Score (Total Characters) : </strong><span>{score}</span>
       </div>
       <div>
-        Characters/Min: <span>{Math.floor(score/(initialTime - timeRemaining) * 60) }</span>
+        <strong>Characters/Min : </strong>
+        <span>
+          {Number.isNaN(Math.floor(score/(initialTime - timeRemaining) * 60)) ? 
+            0 : Math.floor(score/(initialTime - timeRemaining) * 60)
+          }
+        </span>
       </div>
-    </div>
+    </StyledTimer>
   )
 } 
+
+
+
+  // return (
+  //   <StyledTimer>
+  //     <h2>Time Remaining</h2>
+  //     <div style={{fontSize: '24pt'}}>{time}</div>
+  //   </StyledTimer>
+  // )
+
 
 export default Scorecard;

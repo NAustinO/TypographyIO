@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import '../stylesheets/styles.css';
 
-const TypingWindow = ({ handleMatchedInput, currentPhrase, queue }) => {
+const TypingWindow = ({ handleMatchedInput, currentPhrase, queue, ...rest }) => {
 
   const [currentInput, setCurrentInput] = useState('');
 
@@ -19,7 +19,7 @@ const TypingWindow = ({ handleMatchedInput, currentPhrase, queue }) => {
   }
 
   return (
-    <div className='typing-window black-border'>
+    <div className='typing-window'>
       <div className='typing-window-section flex-row space-evenly'>
         <div className='typing-window-section-label'>Up Next:</div>
         <div className='typing-window-section-content'>

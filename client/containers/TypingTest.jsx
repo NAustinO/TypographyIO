@@ -7,8 +7,9 @@ import TypingWindow from '../components/TypingWindow';
 import CustomKeyboard from '../components/CustomKeyboard';
 import Keyboard from '../components/Keyboard';
 import sampleText from '../../server/data/phrases';
+import styled from 'styled-components';
 
-const TypingTest = () => {
+const TypingTest = (props) => {
   const initialTime = 60; 
   const queueLength = 5; 
 
@@ -18,6 +19,7 @@ const TypingTest = () => {
   const [phrases, setPhrases] = useState([]);
   const [queue, setQueue] = useState([]); // queue length of 5 
   const [currentPhrase, setCurrentPhrase] = useState('');
+  const [gameOver, setGameOver] = useState(false);
   // const [timeElapsed, setTimeElapsed] = useState(0);
 
 
@@ -26,16 +28,11 @@ const TypingTest = () => {
     getStandings(); // load the standings and set the state 
 
     const parsedPhrases = sampleText.split(' ').reverse();
-
     const initialPhrase = parsedPhrases.shift(); 
-
     const newQueue = parsedPhrases.splice(1, queueLength+1);
 
-    setCurrentPhrase(initialPhrase);
-    // parsePhrases(sampleText); // set the phrases state 
-  
+    setCurrentPhrase(initialPhrase); // set the phrases state 
     setQueue(newQueue); // sets the queue to the new queue array 
-    
     setPhrases(parsedPhrases); // resets the phrases array state
   }, [])
 
@@ -52,24 +49,25 @@ const TypingTest = () => {
 
   // called when the game is ended 
   const endGame = () => {
-
+    setGameOver(true)
   }
 
   const handleMatchedInput = () => {
-    // update the score 
-    setScore(score + currentPhrase.length) 
 
-    // update the current phrase 
-    const nextPhrase = queue.shift();
-    
-    setCurrentPhrase(nextPhrase);
+    if (!gameOver) {
+      // update the score 
+      setScore(score + currentPhrase.length) 
   
-    // update the queue
-    queue.push(phrases.shift());
-    setQueue(queue);
-
-    // update the phrases array 
-    setPhrases(phrases);
+      // update the current phrase     
+      setCurrentPhrase(queue.shift());
+    
+      // update the queue
+      queue.push(phrases.shift());
+      setQueue(queue);
+  
+      // update the phrases array 
+      setPhrases(phrases);
+    }
   }
 
 
@@ -100,26 +98,59 @@ const TypingTest = () => {
   }
 
   return (
-    <div className='typing-test-container'>
-      <div>
+    <StyledContainer>
+      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px', paddingTop: '50px'}}>
+        <StyledHeader>Programming Typing Test</StyledHeader>
         <TypingWindow
           queue={queue}
           handleMatchedInput={handleMatchedInput}
           currentPhrase={currentPhrase}
         />
+        <StyledDivider/>
         <CustomKeyboard />
       </div>
-      <div>
+      <StyledSidebar>
         <Timer time={time} />
+        <StyledDivider />
         <Scorecard 
           timeRemaining={time}
           initialTime={initialTime}
           score={score} 
         />
+        <StyledDivider />
         <Leaderboard standings={standings} />
-      </div>
-    </div>
+      </StyledSidebar>
+    </StyledContainer>
   )
 }
 
+const StyledHeader = styled.div`
+  font-size: 20pt;
+  font-weight: bold;
+  font-family: arial;
+`;
+
+const StyledDivider = styled.hr`
+  border-top: 1px solid rgb(220,220,220);
+  width: 85%;
+`;
+
+const StyledContainer = styled.div`
+  background-color: rgb(244, 246, 246);
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+`;
+
+
+
+const StyledSidebar = styled.div`
+  color: rgb(40,40,40);
+  display: flex;
+  flex-direction: column; 
+  row-gap: 10px;
+  padding: 10px 40px;
+  background-color: lightgrey;
+  // justify-content: space-evenly; 
+`;
 export default TypingTest;
