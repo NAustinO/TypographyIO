@@ -47,9 +47,6 @@ app.get('/api/standings',(req, res, next) => {
   })
 })
  
-// app.get('/register', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../client/index.html'));
-// })
 
 app.post('/api/register',
   userController.createUser,

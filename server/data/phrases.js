@@ -10,4 +10,27 @@ const sampleText = `
 
   Curabitur tristique enim nec magna venenatis, id malesuada magna sagittis. Sed sed semper metus. Nulla facilisi. Ut iaculis nulla sed viverra facilisis. Nullam nulla urna, faucibus ac viverra aliquet, fringilla ac nisi. Proin nec finibus erat. Proin mi neque, dapibus aliquam gravida eu, efficitur nec mauris. In efficitur mi volutpat, suscipit nulla sed, tempor velit. Cras cursus tristique lectus. Etiam eu risus sed ex tincidunt sollicitudin. Donec interdum vulputate leo. Vivamus commodo, nisl sed malesuada venenatis, libero eros gravida nulla, tincidunt tincidunt nisi ante ac erat. Nam maximus neque quis ante blandit scelerisque.`;
 
+
+// const sampleText = `
+// fetch(link).then(data=>data.json())
+// .then(data => { 
+//   const messageBox = document.getElementById('messagebox');
+//   if (lastMessageIndex === undefined) {
+//     lastMessageIndex = data.length - 1;
+//     for (let i = 0; i < data.length - 1; i++) {
+//       innerHTML += <div class="message-container">
+//     messageBox.innerHTML = innerHTML;
+//     // render(data, messageBox);
+//   } else {
+//     console.log(data)
+//     const unrefreshed = data.slice(0, data.length - lastMessageIndex);
+//     console.log(unrefreshed)
+//     for (let i = 0; i < unrefreshed.length - 1; i++) {
+//       innerHTML += <div class="message-container">
+//     }
+//     messageBox.innerHTML = messageBox.innerHTML + innerHTML
+//     lastMessageIndex = data.length;
+//     render(unrefreshed, messageBox)
+//   }
+// `;
 export default sampleText;

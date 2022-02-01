@@ -25,7 +25,7 @@ const TypingWindow = ({ handleMatchedInput, currentPhrase, queue, ...rest }) => 
         <div className='typing-window-section-content'>
         {
           queue.slice().reverse().map((el, index) => {
-            return <div key={index}>{el}</div>
+            return <div type="text" key={index}>{el}</div>
           })
         }
         </div>
@@ -45,5 +45,7 @@ const TypingWindow = ({ handleMatchedInput, currentPhrase, queue, ...rest }) => 
     </div>
   )
 } 
+
+
 
 export default TypingWindow;
