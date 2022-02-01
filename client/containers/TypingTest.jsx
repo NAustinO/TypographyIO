@@ -32,6 +32,7 @@ const TypingTest = ({ name, duration }) => {
   const [currentPhrase, setCurrentPhrase] = useState('');
   const [gameOver, setGameOver] = useState(false);
 
+
   // called on initial render to initialize the test
   useEffect(() => {
     getStandings(); // load the standings and set the state 
@@ -39,11 +40,12 @@ const TypingTest = ({ name, duration }) => {
     const initialPhrase = parsedPhrases.shift(); 
     const newQueue = parsedPhrases.splice(1, queueLength+1);
 
+
     setCurrentPhrase(initialPhrase); // set the phrases state 
     setQueue(newQueue); // sets the queue to the new queue array 
     setPhrases(parsedPhrases); // resets the phrases array state
   }, [])
-
+  
 
   // timer 
   useEffect(() => {
@@ -55,6 +57,7 @@ const TypingTest = ({ name, duration }) => {
       }, 1000);
     }
   }, [time])
+
 
   // called when the game is ended 
   const endTest = () => {
@@ -87,6 +90,7 @@ const TypingTest = ({ name, duration }) => {
       // update the current phrase     
       setCurrentPhrase(queue.shift());
     
+      
       // update the queue
       queue.push(phrases.shift());
       setQueue(queue);
@@ -94,6 +98,8 @@ const TypingTest = ({ name, duration }) => {
       // update the phrases array 
       setPhrases(phrases);
     }
+
+    
   }
 
 
@@ -111,6 +117,7 @@ const TypingTest = ({ name, duration }) => {
       //   console.log(err);
       // })
   }
+
 
   return (
     <StyledContainer>
