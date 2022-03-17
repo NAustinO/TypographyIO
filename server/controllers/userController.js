@@ -13,7 +13,7 @@ userController.checkAuthStatus = (req, res, next) => {
 
 // TODO check if user is logged in already
 userController.createUser = (req, res, next) => {
-
+  console.log('in userController create user ')
   if (!req.body.username || !req.body.password) {
     console.log('no username or password found')
     // return res.redirect('/register');
