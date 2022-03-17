@@ -1,6 +1,7 @@
 const { Pool, Client } = require('pg');
+require('dotenv').config({path: '../.env'});
 
-const PG_URI = 'postgres://iprdynqg:hLuKBDZKbgiH76fpcfXII14LvGCzrWXv@isilo.db.elephantsql.com/iprdynqg';
+const PG_URI = process.env.DB_CONNECTION_URI;
 const pool = new Pool({ 
   connectionString: PG_URI,
 });
@@ -16,3 +17,4 @@ module.exports = pool;
 Sequences
 
 */
+
