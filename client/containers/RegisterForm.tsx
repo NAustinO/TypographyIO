@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { Link as RouterLink } from 'react-router-dom';
+
 // import { Link } from 'react-router-dom';
 import '../stylesheets/styles.css';
 import { useNavigate } from "react-router"
@@ -18,19 +19,9 @@ import {
   Box, 
   Typography,
   Container,
-  makeStyles
 } from "@mui/material";
 import { VisibilityOffTwoTone, VisibilityTwoTone } from "@mui/icons-material";
 import { PeopleAltTwoTone } from "@mui/icons-material";
-
-// const useStyles = makeStyles(theme => ({
-//   paper: {
-//     marginTop: theme.spacing(8),
-//     display: 'flex',
-//     flexDirection: 'column',
-//     alignItems: 'center'
-//   }
-// }));
 
 
 const RegisterForm = (props: any) => {
@@ -38,11 +29,15 @@ const RegisterForm = (props: any) => {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    username: '',
+    firstName: '',
+    lastName: '', 
+    email: '', 
     password: ''
   })
 
-  // const classes = useStyles;
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+  }
 
 
   // const [username, setUsername] = useState('');
@@ -85,17 +80,29 @@ const RegisterForm = (props: any) => {
   //     }) 
   // }
 
+
   return (
     <Container component={'main'} maxWidth='xs' >
       <CssBaseline />
-      <div>
+      <div style={{
+        display: 'flex', 
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        rowGap: '1em',
+        position: 'fixed',
+        left: '25%', 
+        right: '25%',
+        bottom: '25%',
+        top: '25%'
+      }}>
         <Avatar >
           <PeopleAltTwoTone/>
         </Avatar>
         <Typography component='h1' variant='h5'>
           Sign up
         </Typography>
-        <form noValidate>
+        <form noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField 
@@ -107,6 +114,7 @@ const RegisterForm = (props: any) => {
                 id='firstName'
                 label='First Name'
                 autoFocus
+                onChange={(e) => { setForm({...form, firstName: e.target.value})}}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -118,6 +126,7 @@ const RegisterForm = (props: any) => {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                onChange={(e) => { setForm({...form, lastName: e.target.value})}}
               />
             </Grid>
             <Grid item xs={12}>
@@ -125,10 +134,12 @@ const RegisterForm = (props: any) => {
                 variant="outlined"
                 required
                 fullWidth
+                type='email'
                 id="email"
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={(e) => { setForm({...form, email: e.target.value })}}
               />
             </Grid>
             <Grid item xs={12}>
@@ -136,11 +147,16 @@ const RegisterForm = (props: any) => {
                 variant="outlined"
                 required
                 fullWidth
+                helperText={
+                  `Must contain at least 10 characters and at least 3 of the following: 
+                  uppercase, lowercase, numeric, or special characters.`
+                }
                 name="password"
                 label="Password"
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={(e) => { setForm({...form, password: e.target.value })}}
               />
             </Grid>
             <Grid item xs={12}>
@@ -155,21 +171,20 @@ const RegisterForm = (props: any) => {
             fullWidth
             variant="contained"
             color="primary"
-          
           >
             Sign Up
           </Button>
-          <Grid >
-            <Grid item>
-          
-              <RouterLink to='/login'>
-                Already have an account? Sign in
-              </RouterLink>
-  
+          <Grid container justifyContent={'space-evenly'} >
+            <Grid item >
+              {/* <Button variant='outlined' > */}
+                <RouterLink to='/login'>
+                  Already have an account? Sign in
+                </RouterLink>
+              {/* </Button> */}
+
             </Grid>
           </Grid>
         </form>
-
       </div>
     </Container>
   )
