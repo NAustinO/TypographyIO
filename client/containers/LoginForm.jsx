@@ -79,9 +79,6 @@ const LoginForm = () => {
                 </Link>
               </Grid>
             </Grid>
-            {/* <Box mt={5}>
-              <MadeWithLove />
-            </Box> */}
           </form>
         </div>
       </Grid>
