@@ -105,8 +105,9 @@ _Below is an example of how you can run this application on your local machine. 
 
 <!-- USAGE EXAMPLES -->
 ## Demo
+![Interface](https://github.com/NAustinO/TypographyIO/blob/dev/demo/TestScreenshot.png?raw=true)
 
-![Interface](https://github.com/NAustinO/TypographyIO/blob/main/db/schema.png?raw=true)
+![Signup](https://github.com/NAustinO/TypographyIO/blob/dev/demo/register.png?raw=true)
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
