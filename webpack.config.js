@@ -3,11 +3,15 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  // mode: 
   entry: path.resolve(__dirname, './client/index.js'),
   devServer : {
+    historyApiFallback: true, 
     static: {
-      directory: path.join(__dirname, 'client')
+      publicPath: '/build', 
+      directory: path.resolve(__dirname, 'build')
     },
+    port: 8080,
     proxy: {
       '/api/': {
         target: "http://localhost:3000",
@@ -49,10 +53,15 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       }
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.css'], 
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', ''], 
   }
 }

@@ -27,8 +27,9 @@ body {
  
 .app {
   display: flex;
-  flex-direction: column;
+  height: 100vh;
   align-items: center;
+  justify-content: center;
 }
 
 .navbar {
@@ -40,6 +41,7 @@ body {
 
 .test-phrase-area {
   width: 75%;
+  min-height: 30px;
   border: 2px solid grey;
 }
 
@@ -63,10 +65,6 @@ body {
 }
 
 
-
-.typing-test-container {
-
-}
 
 
 .typing-window {

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import reactDom from 'react-dom';
-
 import styled from 'styled-components';
-
 
 const TestSetup = ({ ...rest }) => {
   const navigate = useNavigate();
@@ -12,6 +10,7 @@ const TestSetup = ({ ...rest }) => {
   const [name, setName] = useState('');
 
   const handleSubmit = (e) => {
+    e.preventDefault()
     navigate('/test', {
       state: {
         name: name, 

@@ -26,12 +26,4 @@ const Scorecard = ({ score, initialTime, timeRemaining, ...rest }) => {
 
 
 
-  // return (
-  //   <StyledTimer>
-  //     <h2>Time Remaining</h2>
-  //     <div style={{fontSize: '24pt'}}>{time}</div>
-  //   </StyledTimer>
-  // )
-
-
 export default Scorecard;

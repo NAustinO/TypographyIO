@@ -22,26 +22,22 @@ app.use(cookieParser());
 // controllers 
 const userController = require('./controllers/userController');
 
-
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/index.html'));
-//   // res.sendFile(path.resolve(__dirname, '../client/index.html'));
-// })
-
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));
 })
 
-
 app.get('/api/standings',(req, res, next) => {
-
+  console.log('in api/standings')
+  return next()
   db.query(`SELECT * FROM gamelog ORDER BY score DESC LIMIT(10)`, (err, data) => {
-    if (err) return next({
-      message: {
+    if (err) { 
+      console.log('error in db.query select * from gamelog ')
+      return next({ message: {
         err: 'An error occurred while getting standings from database', 
-      }
-    });
+      }})
+    }
     else {
+      console.log('getting rows');
       res.status(200).json(data.rows)
     }
   })
@@ -72,11 +68,6 @@ app.post('/api/record/result', (req, res, next) => {
 })
 
 
-
-// app.get('/error', (req, res) => {
-//   res.send('There was an error');
-// })
-
 // global error handler 
 app.use((err, req, res, next) => {
   const defaultErr = {
@@ -88,7 +79,6 @@ app.use((err, req, res, next) => {
   console.log(errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
-
 
 
 app.listen(PORT, () => {
