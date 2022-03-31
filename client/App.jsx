@@ -12,7 +12,6 @@ const App = (props) => {
   return (
     <div className="app">
       <Navbar/>
-
       <Routes>
         <Route path='/' element={<TestSetup/>}/> 
         <Route path='/test' element={<TypingTest/>}/> 

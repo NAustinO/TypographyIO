@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import shuffle from '../utils/randomize';
+import generateRandomText from '../utils/generateRandomText';
 
 const TypingTest = ({ name, duration }) => {
 
@@ -32,7 +33,8 @@ const TypingTest = ({ name, duration }) => {
   // called on initial render to initialize the test
   useEffect(() => {
     getStandings(); // load the standings and set the state 
-    const parsedPhrases = shuffle(sampleText.split(' ').reverse());
+    // const parsedPhrases = shuffle(sampleText.split(' ').reverse());
+    const parsedPhrases = generateRandomText(initialTime).split(' '); 
     const initialPhrase = parsedPhrases.shift(); 
     const newQueue = parsedPhrases.splice(1, queueLength+1);
     setCurrentPhrase(initialPhrase); // set the phrases state 
@@ -97,9 +99,6 @@ const TypingTest = ({ name, duration }) => {
       .then(data => {
         setStandings(data);
       })
-      // .error(err => {
-      //   console.log(err);
-      // })
   }
 
   return (
@@ -145,6 +144,14 @@ const StyledContainer = styled.div`
   display: flex;
   justify-content: center;
   border-radius: 10px;
+  justify-self: center; 
+  align-self: center;
+  /* Center vertically and horizontally */
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+
 `;
 
 
@@ -156,6 +163,7 @@ const StyledSidebar = styled.div`
   row-gap: 10px;
   padding: 10px 40px;
   background-color: lightgrey;
-  // justify-content: space-evenly; 
+  border-radius: inherit; 
+
 `;
 export default TypingTest;

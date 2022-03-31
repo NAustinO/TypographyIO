@@ -181,7 +181,6 @@ const RegisterForm = (props: any) => {
                   Already have an account? Sign in
                 </RouterLink>
               {/* </Button> */}
-
             </Grid>
           </Grid>
         </form>

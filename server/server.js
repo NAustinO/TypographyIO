@@ -29,18 +29,18 @@ app.get('/', (req, res) => {
 app.get('/api/standings',(req, res, next) => {
   console.log('in api/standings')
   return next()
-  // db.query(`SELECT * FROM gamelog ORDER BY score DESC LIMIT(10)`, (err, data) => {
-  //   if (err) { 
-  //     console.log('error in db.query select * from gamelog ')
-  //     return next({ message: {
-  //       err: 'An error occurred while getting standings from database', 
-  //     }})
-  //   }
-  //   else {
-  //     console.log('getting rows');
-  //     res.status(200).json(data.rows)
-  //   }
-  // })
+  db.query(`SELECT * FROM gamelog ORDER BY score DESC LIMIT(10)`, (err, data) => {
+    if (err) { 
+      console.log('error in db.query select * from gamelog ')
+      return next({ message: {
+        err: 'An error occurred while getting standings from database', 
+      }})
+    }
+    else {
+      console.log('getting rows');
+      res.status(200).json(data.rows)
+    }
+  })
 })
  
 
